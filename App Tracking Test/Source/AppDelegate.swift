@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AppTrackingTransparency
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setUpWindow()
+        requestTrackingAuthorization()
         return true
     }
 
@@ -25,5 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         viewController.view.backgroundColor = .systemGreen
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
+    }
+
+    private func requestTrackingAuthorization() {
+        ATTrackingManager.requestTrackingAuthorization {
+            status in
+            print("App Tracking Transparency status: \(status.rawValue)")
+        }
     }
 }
